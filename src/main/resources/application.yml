@@ -1,4 +1,7 @@
 spring:
+  mvc:
+    servlet:
+      path: /api
   sql:
     init:
       mode: always

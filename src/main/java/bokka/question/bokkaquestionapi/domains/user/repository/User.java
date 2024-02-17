@@ -3,7 +3,6 @@ package bokka.question.bokkaquestionapi.domains.user.repository;
 import bokka.question.bokkaquestionapi.common.enums.Status;
 import bokka.question.bokkaquestionapi.domains.question.repository.Manage;
 import bokka.question.bokkaquestionapi.domains.rank.repository.Rank;
-import bokka.question.bokkaquestionapi.domains.rank.repository.RankTier;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +22,14 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
+
+    @Builder
+    public User(Rank rank, String userSeq, String name) {
+        this.userSeq = userSeq;
+        this.name = name;
+        this.rank = rank;
+        if(rank != null) rank.initUserRank(this);
+    }
 
     @Id
     @Column(name = "user_seq")
@@ -48,12 +55,6 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Manage> manages = new ArrayList<>();
 
-    @Builder
-    public User(Rank rank, String userSeq, String name) {
-        this.userSeq = userSeq;
-        this.name = name;
-        this.rank = rank;
-        if(rank != null) rank.initUserRank(this);
-    }
+
 
 }

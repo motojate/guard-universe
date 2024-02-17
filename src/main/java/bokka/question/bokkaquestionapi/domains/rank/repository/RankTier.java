@@ -11,7 +11,6 @@ import java.util.List;
 
 @Getter
 @Entity
-@ToString
 @Table(name = "BK_MB_RANK_TIER")
 public class RankTier {
 

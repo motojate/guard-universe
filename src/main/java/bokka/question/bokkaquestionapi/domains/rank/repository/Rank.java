@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 
 @Getter
 @Entity
-@ToString
 @Table(name = "BK_MB_RANK")
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

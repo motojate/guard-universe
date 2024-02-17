@@ -18,12 +18,18 @@ public class UserService {
     private final UserRepository userRepository;
     private final RankTierRepository rankTierRepository;
 
-    public User saveUser(CreateUserDto createUserDto) {
+    public void saveUser(CreateUserDto createUserDto) {
 
         RankTier rankTier = rankTierRepository.findById(Tier.BRONZE).orElseThrow();
         Rank newRank = Rank.builder().rankTier(rankTier).build();
         User newUser = User.builder().userSeq(createUserDto.getUserSeq()).name(createUserDto.getName()).rank(newRank).build();
 
-        return userRepository.save(newUser);
+        userRepository.save(newUser);
     }
+
+    public String findUserName(String userSeq) {
+        User user = userRepository.findById(userSeq).orElseThrow();
+        return user.getName();
+    }
+
 }
