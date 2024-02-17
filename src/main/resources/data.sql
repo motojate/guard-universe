@@ -1,0 +1,1 @@
+insert into BK_MB_RANK_TIER (tier) values ('BRONZE'),('SILVER'),('GOLD');
