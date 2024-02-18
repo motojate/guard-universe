@@ -1,6 +1,5 @@
 package bokka.question.bokkaquestionapi.domains.user.repository;
 
-import bokka.question.bokkaquestionapi.common.enums.Status;
 import bokka.question.bokkaquestionapi.domains.question.repository.Manage;
 import bokka.question.bokkaquestionapi.domains.rank.repository.Rank;
 import jakarta.persistence.*;
@@ -31,15 +30,16 @@ public class User {
         if(rank != null) rank.initUserRank(this);
     }
 
+    public void updateUserName(String name) {
+        this.name = name;
+    }
+
     @Id
     @Column(name = "user_seq")
     private String userSeq;
 
     @Column(unique = true)
     private String name;
-
-    @Enumerated(EnumType.STRING)
-    private Status status = Status.Y;
 
     @CreatedDate
     @Column(name = "created_at", updatable = false)
@@ -54,7 +54,5 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Manage> manages = new ArrayList<>();
-
-
 
 }
