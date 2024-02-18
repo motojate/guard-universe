@@ -1,21 +1,14 @@
 package bokka.question.bokkaquestionapi.domains.user.controller;
-
 import bokka.question.bokkaquestionapi.common.response.BaseResponse;
-import bokka.question.bokkaquestionapi.domains.user.dto.request.CreateUserDto;
 import bokka.question.bokkaquestionapi.domains.user.dto.request.UpdateUserDto;
 import bokka.question.bokkaquestionapi.domains.user.dto.response.GetUserName;
 import bokka.question.bokkaquestionapi.domains.user.repository.User;
 import bokka.question.bokkaquestionapi.domains.user.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -34,16 +27,15 @@ public class UserController {
     }
 
     @PutMapping("name")
-    public ResponseEntity<BaseResponse<Void>> updateUserName(@RequestAttribute("userSeq") String userSeq, @RequestBody() String name) {
-        UpdateUserDto updateUserDto = UpdateUserDto.builder().userSeq(userSeq).name(name).build();
-
+    public ResponseEntity<BaseResponse<Void>> updateUserName(@RequestAttribute("userSeq") String userSeq, @RequestBody Map<String, String> updateUserNameDto) {
+        UpdateUserDto updateUserDto = UpdateUserDto.builder().userSeq(userSeq).name(updateUserNameDto.get("name")).build();
         userService.updateUserName(updateUserDto);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("create")
-    public ResponseEntity<User> saveUser(@RequestBody CreateUserDto createUserDto) {
-        userService.saveUser(createUserDto);
+    public ResponseEntity<User> saveUser(@RequestAttribute("userSeq") String userSeq) {
+        userService.saveUser(userSeq);
         return ResponseEntity.ok().build();
     }
 }

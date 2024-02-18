@@ -10,6 +10,7 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
 
+    long countByName(String name);
     @Query("SELECT u.name FROM User u WHERE u.userSeq = :userSeq")
     Optional<String> findUserNameByUserSeq(@Param("userSeq") String userSeq);
 }
