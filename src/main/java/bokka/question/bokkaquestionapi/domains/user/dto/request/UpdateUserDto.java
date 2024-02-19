@@ -8,4 +8,5 @@ import lombok.Getter;
 public class UpdateUserDto {
     private String userSeq;
     private String name;
+
 }
