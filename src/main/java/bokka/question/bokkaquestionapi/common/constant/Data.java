@@ -1,4 +1,4 @@
-package bokka.question.bokkaquestionapi.common.constants;
+package bokka.question.bokkaquestionapi.common.constant;
 
 import java.util.List;
 

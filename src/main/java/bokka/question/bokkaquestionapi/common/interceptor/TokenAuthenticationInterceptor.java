@@ -1,6 +1,7 @@
-package bokka.question.bokkaquestionapi.config.security;
+package bokka.question.bokkaquestionapi.common.interceptor;
 
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.GenericFilter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,24 +13,28 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.io.IOException;
 import java.util.*;
 
 @Slf4j
 @Component
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class TokenAuthenticationInterceptor implements HandlerInterceptor {
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String accessToken = extractAccessToken(request);
         String userSeq = authenticate(accessToken);
-
-        log.info(userSeq);
         request.setAttribute("userSeq", userSeq);
-        filterChain.doFilter(request, response);
+        if (userSeq != null) return true;
+        else {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid or missing token");
+            return false;
+        }
+
     }
+
 
     private String extractAccessToken(HttpServletRequest request) throws NoSuchElementException {
         Cookie[] cookies = request.getCookies();

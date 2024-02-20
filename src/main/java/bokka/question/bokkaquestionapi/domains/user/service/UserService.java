@@ -1,11 +1,10 @@
 package bokka.question.bokkaquestionapi.domains.user.service;
 
-import bokka.question.bokkaquestionapi.common.constants.Data;
+import bokka.question.bokkaquestionapi.common.constant.Data;
 import bokka.question.bokkaquestionapi.common.enums.Tier;
 import bokka.question.bokkaquestionapi.domains.rank.repository.Rank;
 import bokka.question.bokkaquestionapi.domains.rank.repository.RankTier;
 import bokka.question.bokkaquestionapi.domains.rank.repository.RankTierRepository;
-import bokka.question.bokkaquestionapi.domains.user.dto.request.CreateUserDto;
 import bokka.question.bokkaquestionapi.domains.user.dto.request.UpdateUserDto;
 import bokka.question.bokkaquestionapi.domains.user.repository.User;
 import bokka.question.bokkaquestionapi.domains.user.repository.UserRepository;
@@ -13,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import java.util.Random;
 

@@ -3,7 +3,6 @@ package bokka.question.bokkaquestionapi.domains.rank.repository;
 import bokka.question.bokkaquestionapi.common.enums.Tier;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
