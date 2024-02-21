@@ -16,7 +16,6 @@ import java.util.List;
 @Slf4j
 @Entity
 @Getter
-@ToString
 @Table(name = "BK_MB_USER")
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

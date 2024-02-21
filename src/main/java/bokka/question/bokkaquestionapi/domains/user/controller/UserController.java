@@ -1,7 +1,7 @@
 package bokka.question.bokkaquestionapi.domains.user.controller;
 import bokka.question.bokkaquestionapi.common.response.BaseResponse;
 import bokka.question.bokkaquestionapi.domains.user.dto.request.UpdateUserDto;
-import bokka.question.bokkaquestionapi.domains.user.dto.response.GetUserName;
+import bokka.question.bokkaquestionapi.domains.user.dto.response.GetUserNameDto;
 import bokka.question.bokkaquestionapi.domains.user.repository.User;
 import bokka.question.bokkaquestionapi.domains.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +19,10 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("name")
-    public ResponseEntity<BaseResponse<GetUserName>> findUserName(@RequestAttribute("userSeq") String userSeq) {
+    public ResponseEntity<BaseResponse<GetUserNameDto>> findUserName(@RequestAttribute("userSeq") String userSeq) {
         String userName = userService.findUserName(userSeq);
-        GetUserName getUserName = GetUserName.builder().name(userName).build();
-        BaseResponse<GetUserName> response = BaseResponse.<GetUserName>builder().result(getUserName).code(200).build();
+        GetUserNameDto getUserName = GetUserNameDto.builder().name(userName).build();
+        BaseResponse<GetUserNameDto> response = BaseResponse.<GetUserNameDto>builder().result(getUserName).code(200).build();
         return ResponseEntity.ok(response);
     }
 

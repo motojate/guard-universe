@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class GetUserName {
+public class GetUserNameDto {
     private String name;
 }
