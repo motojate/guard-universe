@@ -2,6 +2,7 @@ package bokka.question.bokkaquestionapi.domains.rank.controller;
 
 import bokka.question.bokkaquestionapi.common.response.BaseResponse;
 import bokka.question.bokkaquestionapi.domains.rank.dto.response.GetRankDto;
+import bokka.question.bokkaquestionapi.domains.rank.repository.Rank;
 import bokka.question.bokkaquestionapi.domains.rank.service.RankService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

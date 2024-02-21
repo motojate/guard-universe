@@ -1,5 +1,6 @@
 package bokka.question.bokkaquestionapi.domains.rank.repository;
 
+import bokka.question.bokkaquestionapi.common.enums.Tier;
 import bokka.question.bokkaquestionapi.domains.user.repository.User;
 import jakarta.persistence.*;
 import lombok.*;
