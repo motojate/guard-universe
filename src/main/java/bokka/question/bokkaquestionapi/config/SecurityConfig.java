@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Slf4j
@@ -18,14 +20,21 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.csrf(csrf -> csrf.disable()).authorizeRequests(auth -> auth.anyRequest().authenticated()).oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {
-            try {
+        // csrf disable
+        http.csrf(AbstractHttpConfigurer::disable);
 
-                jwt.decoder(jwtConfig.jwtDecoder());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }));
+        // form 로그인 방식 disable
+        http.formLogin(AbstractHttpConfigurer::disable);
+
+        // http basic 인증 방식 disable
+        http.httpBasic(AbstractHttpConfigurer::disable);
+
+        // 인가 설정
+        http.authorizeHttpRequests((auth) -> auth.anyRequest().authenticated());
+
+        //세션 설정 - 가장 중요한 작업
+        http.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
         return http.build();
     }
 }
