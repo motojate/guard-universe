@@ -19,7 +19,6 @@ import java.util.Base64;
 public class JwtConfig {
     @Bean
     public JwtDecoder jwtDecoder() throws Exception {
-        log.info("ads");
         String publicKeyPEM = Files.readString(Path.of(new ClassPathResource("jwt_public_key.pem").getURI()));
         publicKeyPEM = publicKeyPEM
                 .replace("-----BEGIN PUBLIC KEY-----", "")
